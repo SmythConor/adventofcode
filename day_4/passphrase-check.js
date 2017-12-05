@@ -1,6 +1,6 @@
 const fs = require('fs');
 const utils = require('../utils/utils');
-const input = '/Users/conor/work/adventofcode/day_4/input';
+const input = `${__dirname}/input`;
 
 function part1() {
 	utils.readFile(input)
