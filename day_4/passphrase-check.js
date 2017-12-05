@@ -49,35 +49,29 @@ function part2Filter(line) {
 }
 
 function part2() {
-	fs.readFile(input, 'utf-8', (err, data) => {
-		if (err) {
-			console.error(`An error occurred: ${err}`);
-		}
-
-		if (data) {
-			const lines = data.split('\n');
+	utils.readFile(input)
+		.then((lines) => {
 			const validLines = lines.filter(part1Filter).filter(part2Filter);
 
 			console.log(`There is ${validLines.length} valid lines which should equal 186`);
-		}
-	});
+		}).catch((error) => {
+			console.error(`An error occurred: ${error}`);
+		});
 }
 
 part1();
 part2();
 
 function gatherLetterCount(word) {
-	let counts = {};
+	const counts = {};
 
-	for (let i = 0; i < word.length; i++) {
-		const character = word.charAt(i);
-
-		if (!counts[character]) {
-			counts[character] = 0;
+	[...word].forEach((letter) => {
+		if (!counts[letter]) {
+			counts[letter] = 0;
 		}
 
-		counts[character]++;
-	}
+		counts[letter]++;
+	});
 
 	return counts;
 }

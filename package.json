@@ -1,0 +1,19 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "Advent of code solutions",
+  "main": "make-day.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/SmythConor/adventofcode.git"
+  },
+  "author": "Conor Smyth",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/SmythConor/adventofcode#readme",
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
+  }
+}
