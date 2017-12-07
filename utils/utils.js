@@ -17,7 +17,7 @@ module.exports = {
 
 		return isEqual;
 	},
-	readFile: function (fileName) {
+	readFile: (fileName) => {
 		return new Promise((resolve, reject) => {
 			const fs = require('fs');
 
@@ -34,5 +34,18 @@ module.exports = {
 				}
 			});
 		})
+	},
+	arraysEqual: (x, y) => {
+		if (x.length !== y.length) {
+			return false;
+		}
+
+		for (let i = 0; i < x.length; i++) {
+			if (x[i] !== y[i]) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }
