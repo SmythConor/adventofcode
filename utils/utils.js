@@ -17,7 +17,7 @@ module.exports = {
 
 		return isEqual;
 	},
-	readFile: (fileName) => {
+	readFile: (fileName, sep = '\n') => {
 		return new Promise((resolve, reject) => {
 			const fs = require('fs');
 
@@ -28,7 +28,7 @@ module.exports = {
 				}
 
 				if (data) {
-					const lines = data.split('\n');
+					const lines = data.split(sep);
 
 					resolve(lines);
 				}
