@@ -47,5 +47,16 @@ module.exports = {
 		}
 
 		return true;
+	},
+	arrayCount: function (predicate) {
+		let count = 0;
+
+		for (let i = 0; i < this.length; i++) {
+			if (predicate.call(this, this[i])) {
+				count++;
+			}
+		}
+
+		return count;
 	}
 }
