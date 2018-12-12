@@ -58,5 +58,16 @@ module.exports = {
 		}
 
 		return count;
+	},
+	arrayPick: function (predicate, format = x => x) {
+		const arr = [];
+
+		for (let i = 0; i < this.length; i++) {
+			if (predicate(this[i])) {
+				arr.push(format(arr[i], i));
+			}
+		}
+
+		return arr;
 	}
 }
