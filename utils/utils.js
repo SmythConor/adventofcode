@@ -1,4 +1,7 @@
 module.exports = {
+	sum: function (prev, acc) {
+		return prev + acc;
+	},
 	deepEquals: function (obj) {
 		const keys = Object.keys(this);
 		const objKeys = Object.keys(obj);
