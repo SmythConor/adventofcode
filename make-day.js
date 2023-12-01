@@ -2,7 +2,7 @@ const fs = require('fs');
 const day = process.argv[2];
 const programName = `${process.argv[3].split(' ').join('-').toLowerCase()}.js`;
 
-const programDefaults = 'const utils = require(\'../utils/utils\');\nconst inputFile = `${__dirname}/input`;';
+const programDefaults = 'const { readFile } = require(\'../utils/utils\');\nconst inputFile = `${__dirname}/input`;';
 
 if (day) {
 	const dirName = `day_${day}`;
@@ -17,7 +17,7 @@ if (day) {
 		} else {
 			console.log(`Making directory ${dirName}`);
 
-			const inputFilenames = ['test_input', 'input', programName];
+			const inputFilenames = ['test-input', 'input', programName];
 
 			inputFilenames.forEach(inputFilename => {
 				const output = (() => {
