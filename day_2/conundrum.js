@@ -1,14 +1,10 @@
 const { readFile } = require('../utils/utils');
 const inputFile = `${__dirname}/input`;
 
-function getNum(input) {
-	return Number(input.match(/[0-9]*/)[0]);
-}
-
 const rules = {
-	'red': (input) => getNum(input) <= 12,
-	'green': (input) => getNum(input) <= 13,
-	'blue': (input) => getNum(input) <= 14
+	'red': (input) => input <= 12,
+	'green': (input) => input <= 13,
+	'blue': (input) => input <= 14
 }
 
 async function getInput() {
@@ -28,7 +24,7 @@ async function getInput() {
 					const count = m[1];
 					const colour = m[2];
 
-					return { colour, count };
+					return { colour, count: Number(count) };
 				})
 
 			return { game, cubeGroups };
@@ -47,10 +43,29 @@ async function part1(gameDetails) {
 }
 
 async function part2(gameDetails) {
+	const result = gameDetails.reduce((counter, currentGamne) => {
+		const cubeMins = {
+			'red': 0,
+			'green': 0,
+			'blue': 0
+		}
 
+		for (let j = 0; j < currentGamne.cubeGroups.length; j++) {
+			const group = currentGamne.cubeGroups[j];
+
+			if (group.count > cubeMins[group.colour]) {
+				cubeMins[group.colour] = group.count
+			}
+		}
+
+		return counter + (cubeMins.red * cubeMins.green * cubeMins.blue);
+	}, 0);
+
+	console.log(result);
 }
 
 (async () => {
 	const input = await getInput();
 	part1(input);
+	part2(input);
 })();
