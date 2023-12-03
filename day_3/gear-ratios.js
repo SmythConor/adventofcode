@@ -14,7 +14,6 @@ function isNumber(input) {
 	const grid = input.map(line => line.split(''));
 
 	const coords = [];
-	const tmp = {};
 
 	for (let y = 0; y < grid.length; y++) {
 		const row = grid[y];
@@ -32,7 +31,7 @@ function isNumber(input) {
 				} else {
 					currentNumber += col;
 				}
-				currentCoords.push(`${y}${x}`);
+				currentCoords.push(`${y}-${x}`);
 			}
 
 			if (currentNumber && !isNumber) {
@@ -51,22 +50,18 @@ function isNumber(input) {
 		}
 	}
 
-	// const visited = {};
 	const visited = [];
 	const nums = [];
 
-	function visit(ogy, ogx, y, x) {
-		// if (visited[`${ogy}${ogx}`] && visited[`${ogy}${ogx}`].includes(`${y}${x}`)) return;
-		if (visited.includes(`${y}${x}`)) return;
+	function visit(y, x) {
+		if (visited.includes(`${y}-${x}`)) return;
 
 		const spot = grid[y][x];
 
 		if (isNumber(spot)) {
-			const i = coords.findIndex((entry) => entry.coords.includes(`${y}${x}`));
+			const i = coords.findIndex((entry) => entry.coords.includes(`${y}-${x}`));
 			nums.push(coords[i].num)
 
-			// if (!visited[`${ogy}${ogx}`]) visited[`${ogy}${ogx}`] = [];
-			// visited[`${ogy}${ogx}`].push(...coords[i].coords);
 			visited.push(...coords[i].coords);
 		}
 	}
@@ -79,30 +74,28 @@ function isNumber(input) {
 			if (isSymbol(col)) {
 				if (y - 1 >= 0) {
 					if (x - 1 >= 0) {
-						visit(y, x, y - 1, x - 1);
-						visit(y, x, y, x - 1);
+						visit(y - 1, x - 1);
+						visit(y, x - 1);
 					}
-					visit(y, x, y - 1, x);
+					visit(y - 1, x);
 					if (x + 1 < row.length) {
-						visit(y, x, y - 1, x + 1);
-						visit(y, x, y, x + 1);
+						visit(y - 1, x + 1);
+						visit(y, x + 1);
 					}
 				}
 				if (y + 1 < grid.length) {
 					if (x - 1 >= 0) {
-						visit(y, x, y + 1, x - 1)
+						visit(y + 1, x - 1)
 					}
-					visit(y, x, y + 1, x);
+					visit(y + 1, x);
 					if (x + 1 < row.length) {
-						visit(y, x, y + 1, x + 1)
+						visit(y + 1, x + 1)
 					}
 				}
 			}
 		}
 	}
 
-	// 479604 too low
-	// 524647 too low
-	console.log(coords);
+	// 527144 // correct
 	console.log(nums.reduce((prev, acc) => prev + acc, 0));
 })();
